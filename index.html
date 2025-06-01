@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Para Minha Princesinha 💖</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+
+  body {
+    margin: 0;
+    background: linear-gradient(135deg, #ffafbd, #ffc3a0);
+    font-family: 'Indie Flower', cursive;
+    color: #5a1a01;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    overflow: hidden;
+    user-select: none;
+  }
+  .heart {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    font-size: 2rem;
+    animation: pulse 1.5s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); color: #ff6f91; }
+    50% { transform: scale(1.3); color: #ff3b6a; }
+  }
+  h1 {
+    font-size: 3.5rem;
+    margin-bottom: 0.2em;
+    text-align: center;
+  }
+  #typing {
+    font-size: 1.5rem;
+    max-width: 320px;
+    text-align: center;
+    min-height: 90px;
+    margin-bottom: 1.5em;
+    line-height: 1.4;
+  }
+  button {
+    background: #ff4e50;
+    border: none;
+    border-radius: 30px;
+    color: white;
+    padding: 15px 25px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(255, 78, 80, 0.4);
+    transition: background 0.3s ease;
+  }
+  button:hover {
+    background: #ff1e25;
+  }
+  #message {
+    margin-top: 1.5em;
+    font-size: 1.3rem;
+    min-height: 80px;
+    max-width: 320px;
+    text-align: center;
+  }
+  .floating-heart {
+    position: fixed;
+    bottom: -50px;
+    font-size: 1.5rem;
+    color: #ff6f91;
+    animation: floatUp 6s linear infinite;
+    opacity: 0.8;
+  }
+  @keyframes floatUp {
+    0% { transform: translateY(0) scale(1); opacity: 0.8;}
+    100% { transform: translateY(-100vh) scale(1.5); opacity: 0;}
+  }
+</style>
+</head>
+<body>
+
+<div class="heart">❤️</div>
+
+<h1>Para Minha Princesinha Nicole</h1>
+
+<div id="typing"></div>
+
+<button id="loveBtn">Clique para saber o quanto te amo 🥰</button>
+
+<div id="message"></div>
+
+<div id="contador" style="margin-top: 2em; font-size: 1rem; font-family: monospace;"></div>
+
+<script>
+// Efeito máquina de escrever para a mensagem inicial
+const text = `Oi, Meu Amor, Minha Princesa, Meu Anjo...  
+Há 3 anos você faz meu coração bater mais forte,  
+mas só há 2 meses que temos o melhor presente:  
+o nosso namoro! 💖`;
+
+const typingElem = document.getElementById('typing');
+let i = 0;
+
+function typeWriter() {
+  if (i < text.length) {
+    typingElem.innerHTML += text.charAt(i) === '\n' ? '<br/>' : text.charAt(i);
+    i++;
+    setTimeout(typeWriter, 60);
+  }
+}
+typeWriter();
+
+// Frases românticas fofinhas
+const phrases = [
+  "Você é o motivo do meu sorriso todos os dias.",
+  "Se eu pudesse te dar uma coisa na vida, te daria meus olhos, só pra você ver o quanto é especial pra mim.",
+  "Estar com você é como viver em um sonho lindo e real.",
+  "Desde que você entrou na minha vida, tudo ficou mais bonito.",
+  "Com você, até os dias mais difíceis se tornam leves.",
+  "Você é a parte mais doce da minha rotina.",
+  "Meu lugar favorito é dentro do seu abraço.",
+  "O tempo passa voando quando estou ao seu lado, e mesmo assim, nunca parece o suficiente.",
+];
+
+const messageElem = document.getElementById('message');
+const loveBtn = document.getElementById('loveBtn');
+let phraseIndex = 0;
+
+loveBtn.addEventListener('click', () => {
+  messageElem.textContent = phrases[phraseIndex];
+  phraseIndex = (phraseIndex + 1) % phrases.length;
+});
+
+// Contador de tempo juntos
+const startDate = new Date('2025-04-01T00:00:00');
+
+const contadorElem = document.getElementById('contador');
+
+function updateCounter() {
+  const now = new Date();
+  let diff = now - startDate;
+
+  const seconds = Math.floor(diff / 1000);
+  const minutes = Math.floor(diff / (1000 * 60));
+  const hours = Math.floor(diff / (1000 * 60 * 60));
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const months = Math.floor(days / 30);
+
+  contadorElem.textContent = `Estamos juntos há:  
+${months} meses, ${days} dias, ${hours} horas,  
+${minutes} minutos e ${seconds} segundos 💞`;
+}
+
+setInterval(updateCounter, 1000);
+updateCounter();
+
+// Corações flutuantes
+function createFloatingHeart() {
+  const heart = document.createElement('div');
+  heart.classList.add('floating-heart');
+  heart.style.left = Math.random() * window.innerWidth + 'px';
+  heart.style.animationDuration = (4 + Math.random() * 3) + 's';
+  heart.style.fontSize = (12 + Math.random() * 24) + 'px';
+  heart.style.opacity = Math.random();
+  heart.textContent = '❤️';
+  document.body.appendChild(heart);
+  setTimeout(() => {
+    heart.remove();
+  }, 7000);
+}
+
+setInterval(createFloatingHeart, 500);
+</script>
+
+</body>
+</html>
